@@ -160,7 +160,7 @@ impl Model {
     /// println!("{:?}", document.get_list_of_compartments())
     /// ```
     pub fn get_list_of_compartments(&self) -> Vec<&Compartment> {
-        self.compartments.iter().map(|(_key, val)| val).collect()
+        self.compartments.values().collect()
     }
     /// Emulating the API of libSBML
     ///
@@ -175,7 +175,7 @@ impl Model {
     /// println!("{:?}", document.get_list_of_species())
     /// ```
     pub fn get_list_of_species(&self) -> Vec<&Species> {
-        self.species.iter().map(|(_key, val)| val).collect()
+        self.species.values().collect()
     }
     /// Emulating the API of libSBML
     ///
@@ -190,7 +190,7 @@ impl Model {
     /// println!("{:?}", document.get_list_of_reactions())
     /// ```
     pub fn get_list_of_reactions(&self) -> Vec<&Reaction> {
-        self.reactions.iter().map(|(_key, val)| val).collect()
+        self.reactions.values().collect()
     }
     /// Use [`ModelRaw`] to parse the SBML document
     /// and then format it into `Model`.
@@ -259,7 +259,7 @@ impl Model {
                 objs.objectives
                     .iter()
                     .flat_map(|n| {
-                        (*n).list_of_flux_objectives
+                        n.list_of_flux_objectives
                             .flux_objectives
                             .iter()
                             .map(|fr| fr.reaction.to_owned().unwrap())

@@ -94,16 +94,13 @@ impl Model {
         }
     }
     fn getListOfCompartments(&self) -> Vec<Compartment> {
-        self.compartments
-            .iter()
-            .map(|(_, n)| n.to_owned())
-            .collect()
+        self.compartments.values().cloned().collect()
     }
     fn getListOfSpecies(&self) -> Vec<Species> {
-        self.species.iter().map(|(_, n)| n.to_owned()).collect()
+        self.species.values().cloned().collect()
     }
     fn getListOfReactions(&self) -> Vec<Reaction> {
-        self.reactions.iter().map(|(_, n)| n.to_owned()).collect()
+        self.reactions.values().cloned().collect()
     }
     fn getParameter(&self, query: String) -> Option<Parameter> {
         self.parameters.get(&query).cloned()
