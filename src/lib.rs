@@ -97,8 +97,6 @@ pub use base_types::{
 pub use unit::{Unit, UnitSId, UnitSIdRef};
 
 pub use model::{parse_document, Model, ModelRaw, ModelUnits};
-#[cfg(feature = "default")]
-pub use pyo::*;
 
 #[cfg(test)]
 mod tests {

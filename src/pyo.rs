@@ -126,7 +126,7 @@ impl Model {
 }
 
 #[pymodule]
-fn rust_sbml(_py: Python, m: &PyModule) -> PyResult<()> {
+fn rust_sbml(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Model>()?;
     m.add_class::<Reaction>()?;
     m.add_class::<Species>()?;
