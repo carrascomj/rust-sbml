@@ -234,7 +234,7 @@ pub struct KineticLaw {
 /// use rust_sbml::Reaction;
 ///
 /// let reactions: Reaction = from_str(
-/// "<reaction id='J1' reversible='false' fbc:lowerFluxBound='-20'>
+/// "<reaction id='J1' reversible='false' fbc:lowerFluxBound='this_lower_bound' fbc:upperFluxBound='this_upper_bound'>
 ///         <listOfReactants>
 ///             <speciesReference species='X0' stoichiometry='2' constant='true'/>
 /// </listOfReactants>
@@ -258,6 +258,8 @@ pub struct KineticLaw {
 ///     .species_references
 ///     .iter()
 ///     .any(|specref| specref.species == "X0"));
+/// assert_eq!(reactions.lower_bound, Some(String::from("this_lower_bound")));
+/// assert_eq!(reactions.upper_bound, Some(String::from("this_upper_bound")));
 /// ```
 #[cfg_attr(feature = "default", pyclass)]
 #[derive(Debug, Deserialize, Serialize, PartialEq, Clone, Default)]
@@ -275,7 +277,7 @@ pub struct Reaction {
     pub kinetic_law: Option<KineticLaw>,
     #[serde(rename = "fbc:lowerFluxBound")]
     pub lower_bound: Option<String>,
-    #[serde(rename = "fbc:lowerUpperBound")]
+    #[serde(rename = "fbc:upperFluxBound")]
     pub upper_bound: Option<String>,
     pub annotation: Option<Annotation>,
 }
